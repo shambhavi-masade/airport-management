@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Flight</title>
+
+    <!-- Correct Flask CSS link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<h2 class="edit-h2">Edit Flight Details</h2>
+
+<div class="edit-box">
+    <form method="POST">
+
+        <label>Flight Number</label>
+        <input type="text" name="flight_no" value="{{ flight.flight_no }}" required>
+
+        <label>Departure Airport</label>
+        <input type="text" name="departure" value="{{ flight.departure }}" required>
+
+        <label>Destination Airport</label>
+        <input type="text" name="destination" value="{{ flight.destination }}" required>
+
+        <label>Departure Time</label>
+        <input type="time" name="departure_time" value="{{ flight.departure_time }}" required>
+
+        <label>Arrival Time</label>
+        <input type="time" name="arrival_time" value="{{ flight.arrival_time }}" required>
+
+        <label>Status</label>
+        <select name="status">
+            <option selected>{{ flight.status }}</option>
+            <option>On Time</option>
+            <option>Delayed</option>
+            <option>Cancelled</option>
+        </select>
+
+        <button type="submit">Update Flight</button>
+    </form>
+
+    <a href="/flights" class="back-link">← Back to Flights</a>
+</div>
+
+</body>
+</html>

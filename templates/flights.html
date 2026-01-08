@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flight Operations</title>
+
+    <!-- CORRECT Flask CSS linking -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="top-bar">
+    <h1>Flight Information</h1>
+    <a href="/" class="back-link">← Dashboard</a>
+</div>
+
+<div class="layout">
+
+    <!-- ADD FLIGHT SECTION -->
+    <div class="form-box">
+        <h2>Add New Flight</h2>
+
+        <form method="POST">
+            <input type="text" name="flight_no" placeholder="Flight Number" required>
+
+            <input type="text" name="departure" placeholder="Departure Airport" required>
+
+            <input type="text" name="destination" placeholder="Destination Airport" required>
+
+            <div class="time-row">
+                <div>
+                    <label>Departure Time</label>
+                    <input type="time" name="departure_time" required>
+                </div>
+                <div>
+                    <label>Arrival Time</label>
+                    <input type="time" name="arrival_time" required>
+                </div>
+            </div>
+
+            <select name="status">
+                <option>On Time</option>
+                <option>Delayed</option>
+                <option>Cancelled</option>
+            </select>
+
+            <button type="submit">Save Flight</button>
+        </form>
+    </div>
+
+    <!-- TABLE SECTION -->
+    <div class="table-box">
+        <h2>Scheduled Flights</h2>
+
+        {% if flights %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Flight</th>
+                    <th>Departure</th>
+                    <th>Destination</th>
+                    <th>Dep Time</th>
+                    <th>Arr Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for f in flights %}
+                <tr>
+                    <td>{{ f.flight_no }}</td>
+                    <td>{{ f.departure }}</td>
+                    <td>{{ f.destination }}</td>
+                    <td>{{ f.departure_time }}</td>
+                    <td>{{ f.arrival_time }}</td>
+
+                    {% if f.status == "On Time" %}
+                        <td class="on">{{ f.status }}</td>
+                    {% elif f.status == "Delayed" %}
+                        <td class="delay">{{ f.status }}</td>
+                    {% else %}
+                        <td class="cancel">{{ f.status }}</td>
+                    {% endif %}
+
+                    <td class="actions">
+                        <a href="/edit_flight/{{ f.id }}" class="edit-btn">Edit</a>
+                        <a href="/delete_flight/{{ f.id }}"
+                        class="delete-btn"
+                        onclick="return confirm('Delete this flight?')">
+                        Delete
+                    </a>
+                </td>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p class="empty">No flight records available.</p>
+        {% endif %}
+    </div>
+
+</div>
+
+</body>
+</html>

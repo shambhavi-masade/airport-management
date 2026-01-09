@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Bookings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Manage Bookings</h1>
+<a href="/">← Back to Dashboard</a>
+
+<hr>
+
+<h2>Create Booking</h2>
+
+<form method="POST">
+    <input type="text" name="passenger_name" placeholder="Passenger Name" required>
+
+    <!-- FLIGHT SELECTION -->
+    <select name="flight_id" onchange="location='?flight_id=' + this.value" required>
+        <option value="">Select Flight</option>
+        {% for f in flights %}
+            <option value="{{ f.id }}"
+                {% if request.args.get('flight_id') == f.id|string %}selected{% endif %}>
+                {{ f.flight_no }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <!-- SEAT SELECTION -->
+    {% if seats %}
+        <select name="seat_id" required>
+            <option value="">Select Seat</option>
+            {% for s in seats %}
+                <option value="{{ s.id }}">{{ s.seat_number }}</option>
+            {% endfor %}
+        </select>
+    {% elif request.args.get('flight_id') %}
+        <p style="color:red;">No seats available for this flight</p>
+    {% endif %}
+
+    <button type="submit">Book Flight</button>
+</form>
+
+<hr>
+
+<h2>Booking List</h2>
+
+{% if bookings %}
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Booking ID</th>
+        <th>Passenger</th>
+        <th>Flight</th>
+        <th>Seat</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    {% for b in bookings %}
+    <tr>
+        <td>{{ b.booking_code }}</td>
+        <td>{{ b.passenger_name }}</td>
+        <td>{{ b.flight_no }}</td>
+        <td>{{ b.seat_number }}</td>
+        <td>{{ b.booking_status }}</td>
+        <td>
+            <a href="/delete_booking/{{ b.id }}"
+               onclick="return confirm('Cancel this booking?')">
+               Cancel
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No bookings yet.</p>
+{% endif %}
+
+</body>
+</html>

@@ -274,3 +274,163 @@ table td {
     color: #2563eb;
     font-size: 14px;
 }
+/* ===== Manage Bookings Page ===== */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #2c3e50;
+}
+
+a {
+    text-decoration: none;
+    color: #2563eb;
+    font-size: 14px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Form Styling ===== */
+form {
+    background-color: #ffffff;
+    padding: 15px;
+    width: 350px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+}
+
+button {
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #16a34a;
+}
+
+/* ===== Table Styling ===== */
+table {
+    width: 80%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    text-align: center;
+}
+
+table th {
+    background-color: #f1f5f9;
+}
+
+/* ===== Cancel Button ===== */
+table a {
+    color: #dc2626;
+    font-weight: bold;
+}
+
+table a:hover {
+    color: #b91c1c;
+}
+
+/* ===== Empty Message ===== */
+p {
+    color: #6b7280;
+    font-style: italic;
+}
+/* ===== Booking Form Enhancements ===== */
+
+form {
+    background-color: #ffffff;
+    padding: 15px;
+    width: 380px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+}
+
+form button {
+    margin-top: 12px;
+    padding: 10px;
+    width: 100%;
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #16a34a;
+}
+
+/* ===== No Seats Message ===== */
+
+.no-seats {
+    margin-top: 10px;
+    color: #dc2626;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* ===== Booking Table ===== */
+
+table {
+    width: 90%;
+    background-color: #ffffff;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th {
+    background-color: #f1f5f9;
+    padding: 10px;
+    font-size: 14px;
+}
+
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+/* ===== Cancel Button ===== */
+
+table a {
+    padding: 5px 10px;
+    background-color: #dc2626;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+table a:hover {
+    background-color: #b91c1c;
+}

@@ -17,12 +17,12 @@ def flights():
              departure_time, arrival_time, status)
             VALUES (%s, %s, %s, %s, %s, %s)
         """, (
-            request.form["flight_no"],
-            request.form["departure_airport_id"],
-            request.form["arrival_airport_id"],
-            request.form["departure_time"],
-            request.form["arrival_time"],
-            request.form["status"]
+            request.form.get("flight_no"),
+            request.form.get("departure_airport_id"),
+            request.form.get("arrival_airport_id"),
+            request.form.get("departure_time"),
+            request.form.get("arrival_time"),
+            request.form.get("status")
         ))
 
         # 🔥 GET NEW FLIGHT ID
@@ -107,12 +107,12 @@ def edit_flight(id):
             status=%s
             WHERE id=%s
         """, (
-            request.form["flight_no"],
-            request.form["departure_airport_id"],
-            request.form["arrival_airport_id"],
-            request.form["departure_time"],
-            request.form["arrival_time"],
-            request.form["status"],
+            request.form.get("flight_no"),
+            request.form.get("departure_airport_id"),
+            request.form.get("arrival_airport_id"),
+            request.form.get("departure_time"),
+            request.form.get("arrival_time"),
+            request.form.get("status"),
             id
         ))
         conn.commit()

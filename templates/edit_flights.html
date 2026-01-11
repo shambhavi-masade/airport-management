@@ -18,12 +18,24 @@
         <label>Flight Number</label>
         <input type="text" name="flight_no" value="{{ flight.flight_no }}" required>
 
-        <label>Departure Airport</label>
-        <input type="text" name="departure" value="{{ flight.departure }}" required>
+        <select name="departure_airport_id" required>
+                <option value="">Departure Airport</option>
+                {% for a in airports %}
+                    <option value="{{ a.id }}">
+                        {{ a.code }} - {{ a.city }}
+                    </option>
+                {% endfor %}
+            </select>
 
-        <label>Destination Airport</label>
-        <input type="text" name="destination" value="{{ flight.destination }}" required>
-
+            <!-- Arrival Airport -->
+            <select name="arrival_airport_id" required>
+                <option value="">Destination Airport</option>
+                {% for a in airports %}
+                    <option value="{{ a.id }}">
+                        {{ a.code }} - {{ a.city }}
+                    </option>
+                {% endfor %}
+            </select>
         <label>Departure Time</label>
         <input type="time" name="departure_time" value="{{ flight.departure_time }}" required>
 

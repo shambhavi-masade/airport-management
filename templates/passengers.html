@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Passengers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Passengers</h1>
+<a href="/">← Dashboard</a>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Total Bookings</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for p in passengers %}
+    <tr>
+        <td>{{ p.passenger_name }}</td>
+        <td>{{ p.email or "—" }}</td>
+        <td>{{ p.phone or "—" }}</td>
+        <td>{{ p.total_bookings }}</td>
+        <td class="actions">
+            <a href="/passenger/{{ p.id }}" class="view-btn">View</a>
+            <a href="/edit_passenger/{{ p.id }}" class="edit-btn">Edit</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

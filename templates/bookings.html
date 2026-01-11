@@ -21,7 +21,7 @@
         <option value="">Select Flight</option>
         {% for f in flights %}
             <option value="{{ f.id }}"
-                {% if request.args.get('flight_id') == f.id|string %}selected{% endif %}>
+            {% if request.args.get('flight_id') == f.id|string %}selected{% endif %}>
                 {{ f.flight_no }}
             </option>
         {% endfor %}
@@ -29,17 +29,33 @@
 
     <!-- SEAT SELECTION -->
     {% if seats %}
-        <select name="seat_id" required>
-            <option value="">Select Seat</option>
+        <h3>Select Seat</h3>
+
+        <!-- LEGEND -->
+        <div class="legend">
+            <div><span class="seat available"></span> Available</div>
+            <div><span class="seat booked"></span> Booked</div>
+            <div><span class="seat selected"></span> Selected</div>
+        </div>
+
+        <!-- SEAT GRID -->
+        <div class="seat-container">
             {% for s in seats %}
-                <option value="{{ s.id }}">{{ s.seat_number }}</option>
+                {% if s.is_booked %}
+                    <div class="seat booked">{{ s.seat_number }}</div>
+                {% else %}
+                    <label class="seat available">
+                        <input type="radio" name="seat_id" value="{{ s.id }}" hidden>
+                        <span>{{ s.seat_number }}</span>
+                    </label>
+                {% endif %}
             {% endfor %}
-        </select>
+        </div>
     {% elif request.args.get('flight_id') %}
-        <p style="color:red;">No seats available for this flight</p>
+        <p class="no-seats">No seats available</p>
     {% endif %}
 
-    <button type="submit">Book Flight</button>
+    <button type="submit" id="bookBtn" disabled>Book Flight</button>
 </form>
 
 <hr>
@@ -47,7 +63,7 @@
 <h2>Booking List</h2>
 
 {% if bookings %}
-<table border="1" cellpadding="8">
+<table>
     <tr>
         <th>Booking ID</th>
         <th>Passenger</th>
@@ -65,8 +81,9 @@
         <td>{{ b.seat_number }}</td>
         <td>{{ b.booking_status }}</td>
         <td>
-            <a href="/delete_booking/{{ b.id }}"
-               onclick="return confirm('Cancel this booking?')">
+            <a class="cancel-btn"
+               href="/delete_booking/{{ b.id }}"
+               onclick="return confirm('Cancel booking?')">
                Cancel
             </a>
         </td>
@@ -77,5 +94,6 @@
 <p>No bookings yet.</p>
 {% endif %}
 
+<script src="{{ url_for('static', filename='bookings.js') }}"></script>
 </body>
 </html>

@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Flight Operations</title>
-
-    <!-- CORRECT Flask CSS linking -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
@@ -17,16 +15,32 @@
 
 <div class="layout">
 
-    <!-- ADD FLIGHT SECTION -->
+    <!-- ADD FLIGHT -->
     <div class="form-box">
         <h2>Add New Flight</h2>
 
         <form method="POST">
             <input type="text" name="flight_no" placeholder="Flight Number" required>
 
-            <input type="text" name="departure" placeholder="Departure Airport" required>
+            <!-- Departure Airport -->
+            <select name="departure_airport_id" required>
+                <option value="">Departure Airport</option>
+                {% for a in airports %}
+                    <option value="{{ a.id }}">
+                        {{ a.code }} - {{ a.city }}
+                    </option>
+                {% endfor %}
+            </select>
 
-            <input type="text" name="destination" placeholder="Destination Airport" required>
+            <!-- Arrival Airport -->
+            <select name="arrival_airport_id" required>
+                <option value="">Destination Airport</option>
+                {% for a in airports %}
+                    <option value="{{ a.id }}">
+                        {{ a.code }} - {{ a.city }}
+                    </option>
+                {% endfor %}
+            </select>
 
             <div class="time-row">
                 <div>
@@ -40,16 +54,16 @@
             </div>
 
             <select name="status">
-                <option>On Time</option>
-                <option>Delayed</option>
-                <option>Cancelled</option>
+                <option value="On Time">On Time</option>
+                <option value="Delayed">Delayed</option>
+                <option value="Cancelled">Cancelled</option>
             </select>
 
             <button type="submit">Save Flight</button>
         </form>
     </div>
 
-    <!-- TABLE SECTION -->
+    <!-- FLIGHTS TABLE -->
     <div class="table-box">
         <h2>Scheduled Flights</h2>
 
@@ -58,8 +72,8 @@
             <thead>
                 <tr>
                     <th>Flight</th>
-                    <th>Departure</th>
-                    <th>Destination</th>
+                    <th>Departure City</th>
+                    <th>Destination City</th>
                     <th>Dep Time</th>
                     <th>Arr Time</th>
                     <th>Status</th>
@@ -71,8 +85,8 @@
             {% for f in flights %}
                 <tr>
                     <td>{{ f.flight_no }}</td>
-                    <td>{{ f.departure }}</td>
-                    <td>{{ f.destination }}</td>
+                    <td>{{ f.departure_city }}</td>
+                    <td>{{ f.destination_city }}</td>
                     <td>{{ f.departure_time }}</td>
                     <td>{{ f.arrival_time }}</td>
 
@@ -87,12 +101,10 @@
                     <td class="actions">
                         <a href="/edit_flight/{{ f.id }}" class="edit-btn">Edit</a>
                         <a href="/delete_flight/{{ f.id }}"
-                        class="delete-btn"
-                        onclick="return confirm('Delete this flight?')">
-                        Delete
-                    </a>
-                </td>
-
+                           class="delete-btn"
+                           onclick="return confirm('Delete this flight?')">
+                           Delete
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Passenger Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Passenger Profile</h1>
+<a href="/passengers">← Back</a>
+
+<div class="details-box">
+    <p><b>Name:</b> {{ passenger.name }}</p>
+    <p><b>Email:</b> {{ passenger.email }}</p>
+    <p><b>Phone:</b> {{ passenger.phone }}</p>
+    <p><b>Gender:</b> {{ passenger.gender }}</p>
+    <p><b>Age:</b> {{ passenger.age }}</p>
+</div>
+
+<h2>Travel History</h2>
+
+<table>
+<tr>
+    <th>Booking ID</th>
+    <th>Flight</th>
+    <th>Seat</th>
+    <th>Status</th>
+</tr>
+
+{% for b in bookings %}
+<tr>
+    <td>{{ b.booking_code }}</td>
+    <td>{{ b.flight_no }}</td>
+    <td>{{ b.seat_number }}</td>
+    <td>{{ b.booking_status }}</td>
+</tr>
+{% endfor %}
+</table>
+
+</body>
+</html>

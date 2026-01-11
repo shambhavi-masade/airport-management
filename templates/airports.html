@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Manage Airports</h1>
+<a href="/">← Dashboard</a>
+
+<form method="POST">
+    <input name="code" placeholder="Airport Code (DEL)" required>
+    <input name="name" placeholder="Airport Name" required>
+    <input name="city" placeholder="City" required>
+    <input name="country" placeholder="Country" required>
+
+    <select name="status">
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+    </select>
+
+    <button type="submit">Add Airport</button>
+</form>
+
+<table>
+<tr>
+    <th>Code</th>
+    <th>Name</th>
+    <th>City</th>
+    <th>Country</th>
+    <th>Status</th>
+    <th>Actions</th>
+</tr>
+
+{% for a in airports %}
+<tr>
+    <td>{{ a.code }}</td>
+    <td>{{ a.name }}</td>
+    <td>{{ a.city }}</td>
+    <td>{{ a.country }}</td>
+    <td>{{ a.status }}</td>
+    <td>
+        <a href="/edit_airport/{{ a.id }}">Edit</a>
+        <a href="/delete_airport/{{ a.id }}">Delete</a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+</body>
+</html>
